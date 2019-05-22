@@ -1,0 +1,67 @@
+#ifndef _LV_TRAJECTORY_H_
+#define _LV_TRAJECTORY_H_
+
+#include <bits/stdc++.h>
+#include "Road.h"
+
+using namespace std;
+
+namespace lv_trajectory{
+	class Trajectory{
+	public:
+	//	Trajectory(int carId,int vel);
+		void setCarId(int ID){ carID_ = ID;}
+		int  carId() const { return carID_;}
+		
+		void setCarVel(int vel){ vel_ = vel;}
+		int  carVel() const { return vel_;}
+		
+		void setStartTime(int time){ startTime_ = time; }
+		int  startTime() const { return startTime_;}
+		
+		void setRunTime(int runTime){ runTime_ = runTime;}
+		int  runTime( ){ return runTime_;}
+		
+		void setCanStartTime(int time){ canStartTime_ = time; }
+		int  canStartTime( ) const { return canStartTime_; }
+		
+		void addRoad(int roadID);
+		void updateStartTime(int extraTime){ startTime_ = startTime_ + extraTime; }//车在调度的时候可以出发的时间
+		
+		void setSingleRunTime(const vector<Road> road);
+		
+		
+		int  showRoad(uint& i) const { 
+			if(i<roadList_.size())
+			{
+				return roadList_[i];
+			}
+			else
+			{
+				cout<<"Road return error!"<<endl;
+			}
+		}
+		void showPath() const;
+		void showAll() const;
+		void clean();
+		void addCross(int crossID);
+		bool operator == (const Trajectory &tra)
+		{
+			return (this->carID_ == tra.carID_);		
+		}
+		//size_t  crossEnd_ptr() const {return crossList_.end();}
+		//size_t  crossStart_ptr() const {return crossList_.begin();}
+	private:
+		int	carID_;
+		int	startTime_;
+		int	runTime_;
+		int canStartTime_;
+		int vel_;
+	public:	
+		vector<int>	roadList_;
+		vector<int>	crossList_;	
+		vector<int>	runTimeList_;
+		//vector<int>	runTimeList_;
+	};
+}
+#endif

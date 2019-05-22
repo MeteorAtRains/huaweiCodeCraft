@@ -1,0 +1,36 @@
+#include "IdentifyBasic.h"
+
+RoadsStatus::RoadsStatus(const vector<Road>& roads)
+{	
+	//Road tempRoad;
+	for(size_t i =0; i < roadsList_.size(); i++)
+	{	
+		//tempRoad = roads[i];
+		roadsList_.push_back(roads[i]);
+	}
+	cout<<roadsList_[0].id()<<endl;
+}
+RoadsStatus::RoadsStatus()
+{}
+RoadsStatus::~RoadsStatus()
+{}
+
+void RoadsStatus::clear()
+{
+	roadsList_.clear();
+}
+
+Road* RoadsStatus::find(int roadId)
+{
+	Road roadTarget;
+	roadTarget.setId(roadId);
+	auto it = ::find(roadsList_.begin(),roadsList_.end(),roadTarget);
+/*******
+* Test *
+*******/
+	cout<<"road id:"<<it->id()<<" maxVel"<<it->vmax()<<endl;
+//******	
+
+	return &(*it);
+
+}
